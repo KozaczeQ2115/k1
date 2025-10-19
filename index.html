@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Używamy czcionki Inter dla nowoczesnego wyglądu */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         html { 
             font-family: 'Inter', sans-serif;
         }
@@ -42,6 +43,17 @@
             transform: translateY(0);
             pointer-events: auto;
         }
+
+        /* Styl dla minimalistycznych kart usług w sekcji hero */
+        .service-card {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .service-card:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
     </style>
     <script>
         // Konfiguracja Tailwind CSS
@@ -63,7 +75,7 @@
 <!-- Zaktualizowane body o dark mode, aby tło zmieniało się globalnie -->
 <body class="bg-gray-50 min-h-screen transition-colors duration-300 dark:bg-gray-900">
 
-    <!-- NAGŁÓWEK / PASEK NAWIGACYJNY -->
+    <!-- NAGŁÓWEK / PASEK NAWIGACYJNY (bez zmian, dla kontekstu) -->
     <header class="bg-white shadow-lg sticky top-0 z-50 transition-colors duration-300 dark:bg-gray-800 dark:shadow-xl dark:shadow-gray-700/50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
@@ -190,7 +202,7 @@
             </div>
         </nav>
 
-        <!-- MENU MOBILNE -->
+        <!-- MENU MOBILNE (bez zmian) -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 dark:bg-gray-900 dark:border-gray-700">
             <div class="px-2 pt-2 pb-3 space-y-2 sm:px-3">
                 <!-- Dostosowano linki mobilne do dark mode -->
@@ -227,15 +239,10 @@
         </div>
     </header>
 
-    <!-- ZAAWANSOWANA SEKCJA HERO Z WIDEO W TLE -->
+    <!-- ZAAWANSOWANA SEKCJA HERO Z WIDEO W TLE I USŁUGAMI -->
     <section id="hero" class="relative min-h-[85vh] flex items-center justify-center text-center overflow-hidden">
         <!-- WIDEO TŁOWE -->
         <div class="absolute inset-0">
-            <!-- 
-                Ważne: Wideo musi być hostowane w miejscu, do którego ma Pan dostęp. 
-                Aby zapewnić szeroką kompatybilność, proszę użyć wideo w formacie MP4/WebM.
-                Proszę zamienić 'placeholder.mp4' na ścieżkę do pliku 'background.mov', jeśli jest on odpowiednio zakodowany.
-            -->
             <video id="hero-video" class="w-full h-full object-cover transition-opacity duration-1000" autoplay loop muted playsinline poster="https://placehold.co/1920x1080/003366/0077B6?text=Tło+Kliniczne+Video+Placeholder">
                 <source src="background.mp4" type="video/mp4" onerror="console.error('Brak pliku wideo. Użyto statycznego tła.')">
             </video>
@@ -244,21 +251,63 @@
             <div class="absolute inset-0 bg-garbary-primary/60 backdrop-blur-sm dark:bg-gray-900/70 transition-colors duration-300"></div>
         </div>
 
-        <!-- Kontener z treścią HERO (tekst i CTA) -->
-        <div class="relative z-10 px-4 py-16 max-w-4xl text-white">
+        <!-- Kontener z treścią HERO (tekst, usługi i CTA) -->
+        <div class="relative z-10 px-4 py-16 max-w-6xl text-white">
+            
             <!-- Tytuł - Duży, odważny i z odpowiednią typografią, z efektem cienia na tekście -->
-            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 drop-shadow-lg">
-                Centrum medyczne
-Garbary Clinic
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4 drop-shadow-lg">
+                Centrum medyczne <span class="text-garbary-accent">Garbary Clinic</span>
             </h1>
             
             <!-- Podtytuł -->
-            <p class="text-xl sm:text-2xl font-light mb-10 opacity-90 drop-shadow-md">
-                Specjalistyczna opieka w najwyższym standardzie
+            <p class="text-xl sm:text-2xl font-light mb-12 opacity-90 drop-shadow-md">
+                Specjalistyczna opieka w najwyższym standardzie. Zaufaj doświadczeniu.
             </p>
 
-            <!-- Zaawansowany Przycisk CTA -->
-            <a href="#" class="inline-block px-10 py-4 text-lg font-bold rounded-full text-garbary-primary bg-garbary-accent hover:bg-white transition-all duration-300 shadow-2xl transform hover:scale-105 border-2 border-garbary-accent hover:border-white">
+            <!-- MINIMALISTYCZNA SIATKA USŁUG KLINICZNYCH W SEKCJI HERO -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-16 max-w-5xl mx-auto">
+
+                <!-- Karta Usługi 1: Kardiologia -->
+                <a href="#" class="service-card p-4 sm:p-6 rounded-xl text-center bg-white/10 hover:bg-white/20 transition-all duration-300 backdrop-blur-md">
+                    <!-- Ikona Serca (Lucide Heart) -->
+                    <svg class="h-8 w-8 sm:h-10 sm:w-10 mx-auto mb-2 text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                    <span class="text-sm sm:text-base font-semibold block drop-shadow-sm">Kardiologia</span>
+                </a>
+
+                <!-- Karta Usługi 2: Ortopedia -->
+                <a href="#" class="service-card p-4 sm:p-6 rounded-xl text-center bg-white/10 hover:bg-white/20 transition-all duration-300 backdrop-blur-md">
+                    <!-- Ikona Kości/Stawu (Lucide Bone) -->
+                    <svg class="h-8 w-8 sm:h-10 sm:w-10 mx-auto mb-2 text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 13l-4 4-4-4m8-8l-4 4L1 5m18 0l4 4m-4 4l4-4M5 5l4 4m0 0l-4 4m4-4l4-4m-4 4l4 4M9 5l4-4m0 16l4-4m-4-4l-4 4m4-4l4 4" />
+                    </svg>
+                    <span class="text-sm sm:text-base font-semibold block drop-shadow-sm">Ortopedia</span>
+                </a>
+
+                <!-- Karta Usługi 3: Dermatologia -->
+                <a href="#" class="service-card p-4 sm:p-6 rounded-xl text-center bg-white/10 hover:bg-white/20 transition-all duration-300 backdrop-blur-md">
+                    <!-- Ikona Skóry/Tarczy (Lucide Shield/Skin) -->
+                    <svg class="h-8 w-8 sm:h-10 sm:w-10 mx-auto mb-2 text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m-5 3v1a3 3 0 003 3h4a3 3 0 003-3v-1M5 10V4a2 2 0 012-2h10a2 2 0 012 2v6m-2 0a2 2 0 002 2h-4a2 2 0 002-2v-4a2 2 0 00-2-2h-4a2 2 0 00-2 2v4a2 2 0 002 2h-4a2 2 0 00-2-2z" />
+                    </svg>
+                    <span class="text-sm sm:text-base font-semibold block drop-shadow-sm">Dermatologia</span>
+                </a>
+
+                <!-- Karta Usługi 4: Diagnostyka -->
+                <a href="#" class="service-card p-4 sm:p-6 rounded-xl text-center bg-white/10 hover:bg-white/20 transition-all duration-300 backdrop-blur-md">
+                    <!-- Ikona Skanner (Lucide Monitor/Activity) -->
+                    <svg class="h-8 w-8 sm:h-10 sm:w-10 mx-auto mb-2 text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L14.25 7m-4.5 0l-4.5 10m9 0l4.5-10M4 12h16" />
+                    </svg>
+                    <span class="text-sm sm:text-base font-semibold block drop-shadow-sm">Diagnostyka</span>
+                </a>
+
+            </div>
+            <!-- KONIEC SIATKI USŁUG -->
+
+            <!-- Zaawansowany Przycisk CTA (teraz oddzielony od siatki) -->
+            <a href="#" class="inline-block px-10 py-4 text-lg font-bold rounded-full text-garbary-primary bg-garbary-accent hover:bg-white transition-all duration-300 shadow-2xl transform hover:scale-105 border-2 border-garbary-accent hover:border-white mt-4">
                 Umów Konsultację Online
             </a>
         </div>
@@ -274,15 +323,14 @@ Garbary Clinic
         <div class="mt-10 p-6 bg-white rounded-xl shadow-lg border-l-4 border-garbary-primary transition-colors duration-300 dark:bg-gray-800 dark:shadow-2xl dark:shadow-gray-950/50">
             <h2 class="text-2xl font-semibold text-gray-700 transition-colors duration-300 dark:text-gray-100">Wprowadzone Zmiany</h2>
             <ul class="list-disc list-inside mt-4 space-y-2 text-gray-600 transition-colors duration-300 dark:text-gray-400">
-                <li>**Zaawansowana Sekcja HERO:** Pełnoekranowa sekcja z tłem wideo.</li>
-                <li>**Video Tło:** Dodano tag `<video>` z atrybutami `autoplay`, `loop`, `muted` i `playsinline`.</li>
-                <li>**Overlay Kontrastu:** Nakładka zapewniająca czytelność tekstu na tle wideo w obu trybach (jasnym i ciemnym).</li>
-                <li>**Poprawka Błędu:** Naprawiono błąd `TypeError` w funkcji `toggleTheme`.</li>
+                <li>**Minimalistyczne Usługi w Hero:** Dodano siatkę z 4 kluczowymi usługami (Kardiologia, Ortopedia, Dermatologia, Diagnostyka) bezpośrednio pod tytułem.</li>
+                <li>**Nowy Styl Kart Usług:** Karty mają lekko przezroczyste tło (`bg-white/10`) i efekt rozmycia (`backdrop-blur-md`), aby były subtelne, ale czytelne na tle wideo.</li>
+                <li>**Estetyka:** Poprawiono odstępy, aby uwypuklić minimalistyczny design i scentralizować kluczowe elementy.</li>
             </ul>
         </div>
     </main>
 
-    <!-- KOD JAVASCRIPT -->
+    <!-- KOD JAVASCRIPT (bez zmian) -->
     <script>
         // Logika przełączania trybu jasny/ciemny
         function initializeTheme() {
@@ -323,7 +371,6 @@ Garbary Clinic
                 document.documentElement.classList.add('dark');
                 localStorage.setItem('theme', 'dark');
                 document.getElementById('sun-icon').classList.remove('hidden');
-                // POPRAWIONA LINIA: Wcześniej zawierała błąd, który powodował TypeError.
                 document.getElementById('moon-icon').classList.add('hidden'); 
             }
         }
