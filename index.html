@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Garbary Clinic - Profesjonalny Nav Bar i Hero</title>
-    <!-- Ładowanie Tailwind CSS - używamy go do profesjonalnego i responsywnego stylu -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Ładowanie Tailwind CSS - używamy go do profesjonalnego i responsywnego stylu --><script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Używamy czcionki Inter dla nowoczesnego wyglądu */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
@@ -54,6 +53,30 @@
             transform: translateY(-5px) scale(1.03);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
+
+        /* Dodatkowy styl dla tła statystyk, aby mieć kontrolę nad tłem fallback i jego rozmiarem */
+        .stats-background {
+            background-image: url('background2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden; /* Aby upewnić się, że overlay nie wyjeżdża */
+        }
+        /* Dodanie pseudo-elementu dla overlay'a w trybie ciemnym */
+        .dark .stats-background::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Ciemniejsza nakładka dla trybu ciemnego */
+            z-index: 1;
+        }
+        /* Zapewnienie, że tekst jest nad overlay'em */
+        .dark .stats-background > * {
+            position: relative;
+            z-index: 2;
+        }
+
     </style>
     <script>
         // Konfiguracja Tailwind CSS
@@ -72,53 +95,41 @@
         }
     </script>
 </head>
-<!-- Zaktualizowane body o dark mode, aby tło zmieniało się globalnie -->
-<body class="bg-gray-50 min-h-screen transition-colors duration-300 dark:bg-gray-900">
+<!-- Zaktualizowane body o dark mode, aby tło zmieniało się globalnie --><body class="bg-gray-50 min-h-screen transition-colors duration-300 dark:bg-gray-900">
 
-    <!-- NAGŁÓWEK / PASEK NAWIGACYJNY (bez zmian, dla kontekstu) -->
-    <header class="bg-white shadow-lg sticky top-0 z-50 transition-colors duration-300 dark:bg-gray-800 dark:shadow-xl dark:shadow-gray-700/50">
+    <!-- NAGŁÓWEK / PASEK NAWIGACYJNY (bez zmian, dla kontekstu) --><header class="bg-white shadow-lg sticky top-0 z-50 transition-colors duration-300 dark:bg-gray-800 dark:shadow-xl dark:shadow-gray-700/50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <!-- GŁÓWNY KONTENER NAV BARU: Zwiększona wysokość na h-24 -->
-            <div class="flex justify-between items-center h-24 w-full">
+            <!-- GŁÓWNY KONTENER NAV BARU: Zwiększona wysokość na h-24 --><div class="flex justify-between items-center h-24 w-full">
                 
-                <!-- 1. SEKCJA LEWA (Desktop: Linki O nas, Specjaliści, USŁUGI) -->
-                <div class="hidden lg:flex lg:items-center lg:space-x-2 flex-1 justify-start">
-                    <!-- Dodano klasy dark: dla linków nawigacyjnych -->
-                    <a href="#" class="nav-link text-gray-700 hover:text-garbary-primary hover:bg-garbary-secondary px-3 py-3 text-base font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-garbary-accent">O nas</a>
+                <!-- 1. SEKCJA LEWA (Desktop: Linki O nas, Specjaliści, USŁUGI) --><div class="hidden lg:flex lg:items-center lg:space-x-2 flex-1 justify-start">
+                    <!-- Zaktualizowano link 'O nas' na #about-us --><a href="#about-us" class="nav-link text-gray-700 hover:text-garbary-primary hover:bg-garbary-secondary px-3 py-3 text-base font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-garbary-accent">O nas</a>
                     <a href="#" class="nav-link text-gray-700 hover:text-garbary-primary hover:bg-garbary-secondary px-3 py-3 text-base font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-garbary-accent">Specjaliści</a>
 
-                    <!-- MEGA MENU DLA USŁUG -->
-                    <div class="relative group has-mega-menu">
-                        <!-- Dodano klasy dark: dla przycisku mega menu -->
-                        <button class="nav-link text-gray-700 hover:text-garbary-primary hover:bg-garbary-secondary px-3 py-3 text-base font-medium flex items-center dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-garbary-accent">
+                    <!-- MEGA MENU DLA USŁUG --><div class="relative group has-mega-menu">
+                        <!-- Dodano klasy dark: dla przycisku mega menu --><button class="nav-link text-gray-700 hover:text-garbary-primary hover:bg-garbary-secondary px-3 py-3 text-base font-medium flex items-center dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-garbary-accent">
                             Usługi
-                            <!-- Ikona strzałki -->
-                            <svg class="ml-1 h-5 w-5 transform transition-transform group-hover:rotate-180 text-garbary-primary dark:text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <!-- Ikona strzałki --><svg class="ml-1 h-5 w-5 transform transition-transform group-hover:rotate-180 text-garbary-primary dark:text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
 
-                        <!-- Dostosowanie Mega Menu do trybu ciemnego -->
-                        <div class="mega-menu absolute left-1/2 -translate-x-1/2 mt-0 w-[800px] bg-white rounded-xl shadow-2xl p-6 border-t-4 border-garbary-accent ring-1 ring-gray-200 dark:bg-gray-700 dark:shadow-none dark:ring-gray-600">
+                        <!-- Dostosowanie Mega Menu do trybu ciemnego --><div class="mega-menu absolute left-1/2 -translate-x-1/2 mt-0 w-[800px] bg-white rounded-xl shadow-2xl p-6 border-t-4 border-garbary-accent ring-1 ring-gray-200 dark:bg-gray-700 dark:shadow-none dark:ring-gray-600">
                             <div class="grid grid-cols-3 gap-8">
                                 
-                                <!-- Kolumna 1: Główne specjalizacje -->
-                                <div>
-                                    <!-- Dodano dark:text-gray-100 -->
-                                    <p class="text-base font-semibold text-gray-900 border-b pb-2 mb-3 dark:text-gray-100 dark:border-gray-600">Specjalizacje Podstawowe</p>
+                                <!-- Kolumna 1: Główne specjalizacje --><div>
+                                    <!-- Dodano dark:text-gray-100 --><p class="text-base font-semibold text-gray-900 border-b pb-2 mb-3 dark:text-gray-100 dark:border-gray-600">Specjalizacje Podstawowe</p>
                                     <ul class="space-y-2">
-                                        <!-- Dodano dark: dla linków w mega menu -->
-                                        <li><a href="#" class="block text-sm text-gray-600 hover:text-garbary-primary hover:bg-garbary-secondary p-1 rounded-md dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-garbary-accent">Kardiologia</a></li>
+                                        <!-- Dodano dark: dla linków w mega menu --><li><a href="#" class="block text-sm text-gray-600 hover:text-garbary-primary hover:bg-garbary-secondary p-1 rounded-md dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-garbary-accent">Kardiologia</a></li>
                                         <li><a href="#" class="block text-sm text-gray-600 hover:text-garbary-primary hover:bg-garbary-secondary p-1 rounded-md dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-garbary-accent">Dermatologia</a></li>
                                         <li><a href="#" class="block text-sm text-gray-600 hover:text-garbary-primary hover:bg-garbary-secondary p-1 rounded-md dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-garbary-accent">Ortopedia i Traumatologia</a></li>
                                         <li><a href="#" class="block text-sm text-gray-600 hover:text-garbary-primary hover:bg-garbary-secondary p-1 rounded-md dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-garbary-accent">Neurologia</a></li>
                                         <li><a href="#" class="block text-sm text-gray-600 hover:text-garbary-primary hover:bg-garbary-secondary p-1 rounded-md dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-garbary-accent">Endokrynologia</a></li>
+                                        <li><a href="#" class="block text-sm text-gray-600 hover:text-garbary-primary hover:bg-garbary-secondary p-1 rounded-md dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-garbary-accent">Gastroenterologia</a></li>
                                     </ul>
                                 </div>
                                 
-                                <!-- Kolumna 2: Diagnostyka i Pielęgnacja -->
-                                <div>
+                                <!-- Kolumna 2: Diagnostyka i Pielęgnacja --><div>
                                     <p class="text-base font-semibold text-gray-900 border-b pb-2 mb-3 dark:text-gray-100 dark:border-gray-600">Diagnostyka i Zabiegi</p>
                                     <ul class="space-y-2">
                                         <li><a href="#" class="block text-sm text-gray-600 hover:text-garbary-primary hover:bg-garbary-secondary p-1 rounded-md dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-garbary-accent">USG i RTG</a></li>
@@ -129,10 +140,8 @@
                                     </ul>
                                 </div>
                                 
-                                <!-- Kolumna 3: Akcja i Info (jasne tło z secondary color) -->
-                                <!-- Dostosowano tło do dark mode -->
-                                <div class="bg-garbary-secondary p-4 rounded-lg dark:bg-gray-800">
-                                    <p class="text-base font-semibold text-garbary-primary mb-3">Szybka Rejestracja</p>
+                                <!-- Kolumna 3: Akcja i Info (jasne tło z secondary color) --><!-- Dostosowano tło do dark mode --><div class="bg-garbary-secondary p-4 rounded-lg dark:bg-gray-800">
+                                    <p class="text-base font-semibold text-garbary-primary mb-3 dark:text-garbary-accent">Szybka Rejestracja</p>
                                     <p class="text-sm text-gray-600 mb-4 dark:text-gray-400">Potrzebujesz natychmiastowej porady? Zadzwoń do nas lub skorzystaj z formularza.</p>
                                     <a href="#" class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-lg text-white bg-garbary-primary hover:bg-garbary-accent transition duration-150 transform hover:scale-[1.02]">
                                         Zadzwoń: 123 456 789
@@ -141,59 +150,43 @@
                             </div>
                         </div>
                     </div>
-                    <!-- KONIEC MEGA MENU -->
-                </div>
+                    <!-- KONIEC MEGA MENU --></div>
                 
-                <!-- 2. LOGO (Wyśrodkowane - ZMIANA ROZMIARU NA h-12) -->
-                <a href="#" class="flex items-center space-x-2 p-2 flex-shrink-0">
-                    <!-- Użycie logogarbary.jpg -->
-                    <img src="logogarbary.jpg" 
-                         alt="Logo Garbary Clinic" 
-                         class="h-12 w-auto" 
-                         onerror="this.onerror=null; this.src='https://placehold.co/200x48/999999/FFFFFF?text=Logo+brak'"
+                <!-- 2. LOGO (Wyśrodkowane - ZMIANA ROZMIARU NA h-12) --><a href="#" class="flex items-center space-x-2 p-2 flex-shrink-0">
+                    <!-- Użycie logogarbary.jpg --><img src="logogarbary.jpg" 
+                        alt="Logo Garbary Clinic" 
+                        class="h-12 w-auto" 
+                        onerror="this.onerror=null; this.src='https://placehold.co/200x48/999999/FFFFFF?text=Logo+brak'"
                     >
                 </a>
 
-                <!-- 3. SEKCJA PRAWA (Desktop: Linki, CTA, PRZEŁĄCZNIK TRYBU i Przycisk Mobilny) -->
-                <div class="flex items-center space-x-4 flex-1 justify-end">
+                <!-- 3. SEKCJA PRAWA (Desktop: Linki, CTA, PRZEŁĄCZNIK TRYBU i Przycisk Mobilny) --><div class="flex items-center space-x-4 flex-1 justify-end">
                     
-                    <!-- Prawa grupa linków (Desktop only) -->
-                    <div class="hidden lg:flex lg:items-center lg:space-x-2">
-                        <!-- Dodano klasy dark: dla linków nawigacyjnych -->
-                        <a href="#" class="nav-link text-gray-700 hover:text-garbary-primary hover:bg-garbary-secondary px-3 py-3 text-base font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-garbary-accent">Cennik</a>
+                    <!-- Prawa grupa linków (Desktop only) --><div class="hidden lg:flex lg:items-center lg:space-x-2">
+                        <!-- Dodano klasy dark: dla linków nawigacyjnych --><a href="#" class="nav-link text-gray-700 hover:text-garbary-primary hover:bg-garbary-secondary px-3 py-3 text-base font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-garbary-accent">Cennik</a>
                         <a href="#" class="nav-link text-gray-700 hover:text-garbary-primary hover:bg-garbary-secondary px-3 py-3 text-base font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-garbary-accent">Kontakt</a>
                     </div>
 
-                    <!-- CTA (Call to Action), Przełącznik Dark Mode i Przycisk Menu Mobilnego -->
-                    <div class="flex items-center space-x-4">
+                    <!-- CTA (Call to Action), Przełącznik Dark Mode i Przycisk Menu Mobilnego --><div class="flex items-center space-x-4">
                         
-                        <!-- NOWY ELEMENT: PRZEŁĄCZNIK DARK MODE -->
-                        <button id="theme-toggle" type="button" class="p-2 rounded-full text-gray-500 hover:text-garbary-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-garbary-primary transition duration-200 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-garbary-accent">
-                            <!-- Ikona Słońca (tryb jasny) -->
-                            <svg id="sun-icon" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <!-- NOWY ELEMENT: PRZEŁĄCZNIK DARK MODE --><button id="theme-toggle" type="button" class="p-2 rounded-full text-gray-500 hover:text-garbary-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-garbary-primary transition duration-200 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-garbary-accent">
+                            <!-- Ikona Słońca (tryb jasny) --><svg id="sun-icon" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
-                            <!-- Ikona Księżyca (tryb ciemny) -->
-                            <svg id="moon-icon" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <!-- Ikona Księżyca (tryb ciemny) --><svg id="moon-icon" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                             </svg>
                         </button>
-                        <!-- KONIEC PRZEŁĄCZNIKA DARK MODE -->
-                        
-                        <!-- Przycisk CTA (tylko na desktopie) -->
-                        <a href="#" class="hidden lg:block px-6 py-3 border-2 border-garbary-accent text-base font-semibold rounded-full text-white bg-garbary-accent hover:bg-garbary-primary transition duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
+                        <!-- KONIEC PRZEŁĄCZNIKA DARK MODE --><!-- Przycisk CTA (tylko na desktopie) --><a href="#" class="hidden lg:block px-6 py-3 border-2 border-garbary-accent text-base font-semibold rounded-full text-white bg-garbary-accent hover:bg-garbary-primary transition duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
                             Umów wizytę
                         </a>
 
-                        <!-- Przycisk do otwierania/zamykania menu mobilnego -->
-                        <button id="mobile-menu-button" type="button" class="p-2 rounded-md text-gray-500 hover:text-garbary-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-garbary-primary lg:hidden dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-garbary-accent" aria-controls="mobile-menu" aria-expanded="false">
+                        <!-- Przycisk do otwierania/zamykania menu mobilnego --><button id="mobile-menu-button" type="button" class="p-2 rounded-md text-gray-500 hover:text-garbary-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-garbary-primary lg:hidden dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-garbary-accent" aria-controls="mobile-menu" aria-expanded="false">
                             <span class="sr-only">Otwórz menu główne</span>
-                            <!-- Ikona Hamburger (większa na h-7 w-7 dla lepszego dotyku) -->
-                            <svg id="menu-icon-open" class="block h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <!-- Ikona Hamburger (większa na h-7 w-7 dla lepszego dotyku) --><svg id="menu-icon-open" class="block h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                             </svg>
-                            <!-- Ikona X (większa na h-7 w-7 dla lepszego dotyku) -->
-                            <svg id="menu-icon-close" class="hidden h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <!-- Ikona X (większa na h-7 w-7 dla lepszego dotyku) --><svg id="menu-icon-close" class="hidden h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
@@ -202,35 +195,27 @@
             </div>
         </nav>
 
-        <!-- MENU MOBILNE (bez zmian) -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 dark:bg-gray-900 dark:border-gray-700">
+        <!-- MENU MOBILNE (bez zmian) --><div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 dark:bg-gray-900 dark:border-gray-700">
             <div class="px-2 pt-2 pb-3 space-y-2 sm:px-3">
-                <!-- Dostosowano linki mobilne do dark mode -->
-                <a href="#" class="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-garbary-secondary hover:text-garbary-primary dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-garbary-accent">O nas</a>
+                <!-- Zaktualizowano link 'O nas' na #about-us --><a href="#about-us" class="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-garbary-secondary hover:text-garbary-primary dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-garbary-accent">O nas</a>
                 <a href="#" class="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-garbary-secondary hover:text-garbary-primary dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-garbary-accent">Specjaliści</a>
                 
-                <!-- Rozwijany segment Usługi w menu mobilnym -->
-                <button id="mobile-services-toggle" class="w-full text-left flex justify-between items-center px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-garbary-secondary hover:text-garbary-primary transition duration-150 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-garbary-accent">
+                <!-- Rozwijany segment Usługi w menu mobilnym --><button id="mobile-services-toggle" class="w-full text-left flex justify-between items-center px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-garbary-secondary hover:text-garbary-primary transition duration-150 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-garbary-accent">
                     Usługi
                     <svg id="mobile-arrow" class="h-5 w-5 transition-transform text-garbary-primary dark:text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-                <!-- Podmenu jest lekko wcięte i używa secondary color na hoverze -->
-                <div id="mobile-services-menu" class="hidden space-y-1 py-1 pl-6 border-l border-garbary-accent">
-                    <!-- Dodano dark: dla podlinków mobilnych -->
-                    <a href="#" class="block px-3 py-2 rounded-md text-sm text-gray-600 hover:bg-garbary-secondary hover:text-garbary-primary dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-garbary-accent">Kardiologia</a>
+                <!-- Podmenu jest lekko wcięte i używa secondary color na hoverze --><div id="mobile-services-menu" class="hidden space-y-1 py-1 pl-6 border-l border-garbary-accent">
+                    <!-- Dodano dark: dla podlinków mobilnych --><a href="#" class="block px-3 py-2 rounded-md text-sm text-gray-600 hover:bg-garbary-secondary hover:text-garbary-primary dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-garbary-accent">Kardiologia</a>
                     <a href="#" class="block px-3 py-2 rounded-md text-sm text-gray-600 hover:bg-garbary-secondary hover:text-garbary-primary dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-garbary-accent">Dermatologia</a>
                     <a href="#" class="block px-3 py-2 rounded-md text-sm text-gray-600 hover:bg-garbary-secondary hover:text-garbary-primary dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-garbary-accent">Medycyna Estetyczna</a>
                     <a href="#" class="block px-3 py-2 rounded-md text-sm text-garbary-primary font-semibold hover:bg-garbary-secondary hover:text-garbary-primary dark:text-garbary-accent dark:hover:bg-gray-800 dark:hover:text-garbary-accent">Wszystkie usługi &rarr;</a>
                 </div>
-                <!-- Koniec segmentu Usługi -->
-                
-                <a href="#" class="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-garbary-secondary hover:text-garbary-primary dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-garbary-accent">Cennik</a>
+                <!-- Koniec segmentu Usługi --><a href="#" class="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-garbary-secondary hover:text-garbary-primary dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-garbary-accent">Cennik</a>
                 <a href="#" class="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-garbary-secondary hover:text-garbary-primary dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-garbary-accent">Kontakt</a>
                 
-                <!-- Przycisk CTA w menu mobilnym - mocno wyróżniony i duży -->
-                <div class="px-3 py-4 pt-6">
+                <!-- Przycisk CTA w menu mobilnym - mocno wyróżniony i duży --><div class="px-3 py-4 pt-6">
                     <a href="#" class="block w-full text-center px-4 py-3 text-base font-bold rounded-full text-white bg-garbary-primary hover:bg-garbary-accent transition duration-200 shadow-lg">
                         Umów wizytę teraz
                     </a>
@@ -239,99 +224,199 @@
         </div>
     </header>
 
-    <!-- ZAAWANSOWANA SEKCJA HERO Z WIDEO W TLE I USŁUGAMI -->
-    <section id="hero" class="relative min-h-[85vh] flex items-center justify-center text-center overflow-hidden">
-        <!-- WIDEO TŁOWE -->
-        <div class="absolute inset-0">
+    <!-- ZAAWANSOWANA SEKCJA HERO Z WIDEO W TLE I USŁUGAMI --><section id="hero" class="relative min-h-[85vh] flex items-center justify-center text-center overflow-hidden">
+        <!-- WIDEO TŁOWE --><div class="absolute inset-0">
             <video id="hero-video" class="w-full h-full object-cover transition-opacity duration-1000" autoplay loop muted playsinline poster="https://placehold.co/1920x1080/003366/0077B6?text=Tło+Kliniczne+Video+Placeholder">
                 <source src="background.mp4" type="video/mp4" onerror="console.error('Brak pliku wideo. Użyto statycznego tła.')">
             </video>
             
-            <!-- Półprzezroczysta nakładka (Overlay) dla lepszego kontrastu tekstu, zmieniająca się w trybie ciemnym -->
-            <div class="absolute inset-0 bg-garbary-primary/60 backdrop-blur-sm dark:bg-gray-900/70 transition-colors duration-300"></div>
+            <!-- Półprzezroczysta nakładka (Overlay) dla lepszego kontrastu tekstu, zmieniająca się w trybie ciemnym --><div class="absolute inset-0 bg-garbary-primary/60 backdrop-blur-sm dark:bg-gray-900/70 transition-colors duration-300"></div>
         </div>
 
-        <!-- Kontener z treścią HERO (tekst, usługi i CTA) -->
-        <div class="relative z-10 px-4 py-16 max-w-6xl text-white">
+        <!-- Kontener z treścią HERO (tekst, usługi i CTA) --><div class="relative z-10 px-4 py-16 max-w-6xl text-white">
             
-            <!-- Tytuł - Duży, odważny i z odpowiednią typografią, z efektem cienia na tekście -->
-            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4 drop-shadow-lg">
+            <!-- Tytuł - Duży, odważny i z odpowiednią typografią, z efektem cienia na tekście --><h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4 drop-shadow-lg">
                 Centrum medyczne <span class="text-garbary-accent">Garbary Clinic</span>
             </h1>
             
-            <!-- Podtytuł -->
-            <p class="text-xl sm:text-2xl font-light mb-12 opacity-90 drop-shadow-md">
+            <!-- Podtytuł --><p class="text-xl sm:text-2xl font-light mb-12 opacity-90 drop-shadow-md">
                 Specjalistyczna opieka w najwyższym standardzie. Zaufaj doświadczeniu.
             </p>
 
-            <!-- MINIMALISTYCZNA SIATKA USŁUG KLINICZNYCH W SEKCJI HERO -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-16 max-w-5xl mx-auto">
+            <!-- MINIMALISTYCZNA SIATKA USŁUG KLINICZNYCH W SEKCJI HERO --><div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-16 max-w-5xl mx-auto">
 
-                <!-- Karta Usługi 1: Kardiologia -->
-                <a href="#" class="service-card p-4 sm:p-6 rounded-xl text-center bg-white/10 hover:bg-white/20 transition-all duration-300 backdrop-blur-md">
-                    <!-- Ikona Serca (Lucide Heart) -->
-                    <svg class="h-8 w-8 sm:h-10 sm:w-10 mx-auto mb-2 text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <!-- Karta Usługi 1: Kardiologia --><a href="#" class="service-card p-4 sm:p-6 rounded-xl text-center bg-white/10 hover:bg-white/20 transition-all duration-300 backdrop-blur-md">
+                    <!-- Ikona Serca (Lucide Heart) --><svg class="h-8 w-8 sm:h-10 sm:w-10 mx-auto mb-2 text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                     <span class="text-sm sm:text-base font-semibold block drop-shadow-sm">Kardiologia</span>
                 </a>
 
-                <!-- Karta Usługi 2: Ortopedia -->
-                <a href="#" class="service-card p-4 sm:p-6 rounded-xl text-center bg-white/10 hover:bg-white/20 transition-all duration-300 backdrop-blur-md">
-                    <!-- Ikona Kości/Stawu (Lucide Bone) -->
-                    <svg class="h-8 w-8 sm:h-10 sm:w-10 mx-auto mb-2 text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <!-- Karta Usługi 2: Ortopedia --><a href="#" class="service-card p-4 sm:p-6 rounded-xl text-center bg-white/10 hover:bg-white/20 transition-all duration-300 backdrop-blur-md">
+                    <!-- Ikona Kości/Stawu (Lucide Bone) --><svg class="h-8 w-8 sm:h-10 sm:w-10 mx-auto mb-2 text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 13l-4 4-4-4m8-8l-4 4L1 5m18 0l4 4m-4 4l4-4M5 5l4 4m0 0l-4 4m4-4l4-4m-4 4l4 4M9 5l4-4m0 16l4-4m-4-4l-4 4m4-4l4 4" />
                     </svg>
                     <span class="text-sm sm:text-base font-semibold block drop-shadow-sm">Ortopedia</span>
                 </a>
 
-                <!-- Karta Usługi 3: Dermatologia -->
-                <a href="#" class="service-card p-4 sm:p-6 rounded-xl text-center bg-white/10 hover:bg-white/20 transition-all duration-300 backdrop-blur-md">
-                    <!-- Ikona Skóry/Tarczy (Lucide Shield/Skin) -->
-                    <svg class="h-8 w-8 sm:h-10 sm:w-10 mx-auto mb-2 text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <!-- Karta Usługi 3: Dermatologia --><a href="#" class="service-card p-4 sm:p-6 rounded-xl text-center bg-white/10 hover:bg-white/20 transition-all duration-300 backdrop-blur-md">
+                    <!-- Ikona Skóry/Tarczy (Lucide Shield/Skin) --><svg class="h-8 w-8 sm:h-10 sm:w-10 mx-auto mb-2 text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m-5 3v1a3 3 0 003 3h4a3 3 0 003-3v-1M5 10V4a2 2 0 012-2h10a2 2 0 012 2v6m-2 0a2 2 0 002 2h-4a2 2 0 002-2v-4a2 2 0 00-2-2h-4a2 2 0 00-2 2v4a2 2 0 002 2h-4a2 2 0 00-2-2z" />
                     </svg>
                     <span class="text-sm sm:text-base font-semibold block drop-shadow-sm">Dermatologia</span>
                 </a>
 
-                <!-- Karta Usługi 4: Diagnostyka -->
-                <a href="#" class="service-card p-4 sm:p-6 rounded-xl text-center bg-white/10 hover:bg-white/20 transition-all duration-300 backdrop-blur-md">
-                    <!-- Ikona Skanner (Lucide Monitor/Activity) -->
-                    <svg class="h-8 w-8 sm:h-10 sm:w-10 mx-auto mb-2 text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <!-- Karta Usługi 4: Diagnostyka --><a href="#" class="service-card p-4 sm:p-6 rounded-xl text-center bg-white/10 hover:bg-white/20 transition-all duration-300 backdrop-blur-md">
+                    <!-- Ikona Skanner (Lucide Monitor/Activity) --><svg class="h-8 w-8 sm:h-10 sm:w-10 mx-auto mb-2 text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L14.25 7m-4.5 0l-4.5 10m9 0l4.5-10M4 12h16" />
                     </svg>
                     <span class="text-sm sm:text-base font-semibold block drop-shadow-sm">Diagnostyka</span>
                 </a>
 
             </div>
-            <!-- KONIEC SIATKI USŁUG -->
-
-            <!-- Zaawansowany Przycisk CTA (teraz oddzielony od siatki) -->
-            <a href="#" class="inline-block px-10 py-4 text-lg font-bold rounded-full text-garbary-primary bg-garbary-accent hover:bg-white transition-all duration-300 shadow-2xl transform hover:scale-105 border-2 border-garbary-accent hover:border-white mt-4">
+            <!-- KONIEC SIATKI USŁUG --><!-- Zaawansowany Przycisk CTA (teraz oddzielony od siatki) --><a href="#" class="inline-block px-10 py-4 text-lg font-bold rounded-full text-garbary-primary bg-garbary-accent hover:bg-white transition-all duration-300 shadow-2xl transform hover:scale-105 border-2 border-garbary-accent hover:border-white mt-4">
                 Umów Konsultację Online
             </a>
         </div>
     </section>
     
-    <!-- PRZYKŁADOWA ZAWARTOŚĆ STRONY (kontener główny) -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <!-- Zmieniono text-gray-800 na dark:text-white -->
-        <h1 class="text-4xl font-bold text-gray-800 mb-6 transition-colors duration-300 dark:text-white">Nasze Usługi Kliniczne</h1>
-        <!-- Zmieniono text-gray-600 na dark:text-gray-300 -->
-        <p class="text-lg text-gray-600 transition-colors duration-300 dark:text-gray-300">Tutaj zaczyna się regularna treść strony, poniżej sekcji hero.</p>
-        <!-- Zmieniono bg-white na dark:bg-gray-800 i dostosowano kolory tekstu -->
-        <div class="mt-10 p-6 bg-white rounded-xl shadow-lg border-l-4 border-garbary-primary transition-colors duration-300 dark:bg-gray-800 dark:shadow-2xl dark:shadow-gray-950/50">
+    <!-- NOWA SEKCJA: O KLINICE --><section id="about-us" class="py-16 sm:py-24 bg-white transition-colors duration-300 dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-12">
+                <!-- Tytuł z akcentem kolorystycznym --><h2 class="text-base text-garbary-primary font-semibold tracking-wide uppercase dark:text-garbary-accent">
+                    O Klinice Garbary
+                </h2>
+                <!-- Duży, czytelny nagłówek --><p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl dark:text-white">
+                    Twoje zdrowie jest naszą misją
+                </p>
+                <!-- Podtytuł opisowy --><p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto dark:text-gray-400">
+                    Łączymy nowoczesną technologię z empatyczną opieką, tworząc środowisko, w którym każdy pacjent czuje się bezpiecznie i komfortowo.
+                </p>
+            </div>
+
+            <!-- Kontener z misją i wartościami/osiągnięciami (dwie kolumny na desktopie) --><div class="mt-10 lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
+
+                <!-- Lewa kolumna: Misja i wizja --><div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4 dark:text-white">Nasza Fundacja i Wartości</h3>
+                    
+                    <!-- Główne punkty Misji --><div class="space-y-6">
+                        <!-- Misja --><div class="flex">
+                            <div class="flex-shrink-0">
+                                <!-- Ikona Celu (Target) --><svg class="h-6 w-6 text-garbary-primary dark:text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21H6.737a2 2 0 01-1.789-2.894l3.5-7A2 2 0 019.263 9h5.474a2 2 0 011.789 2.894z" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <dt class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                    Misja Kliniki
+                                </dt>
+                                <dd class="mt-1 text-base text-gray-500 dark:text-gray-400">
+                                    Zapewnienie spersonalizowanej, wielospecjalistycznej opieki medycznej, która wykracza poza standard, stawiając na szybką i skuteczną diagnostykę.
+                                </dd>
+                            </div>
+                        </div>
+
+                        <!-- Wartość 1: Empatia --><div class="flex">
+                            <div class="flex-shrink-0">
+                                <!-- Ikona Rąk (Empatia/Opieka) --><svg class="h-6 w-6 text-garbary-primary dark:text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5v15m-3-6h6m-9-3h12a2 2 0 012 2v6a2 2 0 01-2 2H3a2 2 0 01-2-2v-6a2 2 0 012-2zm0 0a2 2 0 00-2-2h-1a2 2 0 00-2 2v2a2 2 0 002 2h1a2 2 0 002-2v-2z" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <dt class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                    Pełna Empatia
+                                </dt>
+                                <dd class="mt-1 text-base text-gray-500 dark:text-gray-400">
+                                    Rozumiemy, że zdrowie to sprawa osobista. Gwarantujemy dyskrecję, wsparcie i indywidualne podejście do każdego przypadku.
+                                </dd>
+                            </div>
+                        </div>
+
+                        <!-- Wartość 2: Innowacja --><div class="flex">
+                            <div class="flex-shrink-0">
+                                <!-- Ikona Żarówki (Innowacja) --><svg class="h-6 w-6 text-garbary-primary dark:text-garbary-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M15 3h6m-6 0v6a3 3 0 01-3 3H9a3 3 0 01-3-3V3h6z" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <dt class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                    Innowacyjna Medycyna
+                                </dt>
+                                <dd class="mt-1 text-base text-gray-500 dark:text-gray-400">
+                                    Stale inwestujemy w najnowszy sprzęt diagnostyczny oraz szkolenia, aby oferować zabiegi oparte na aktualnej wiedzy medycznej.
+                                </dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prawa kolumna: Statystyki i Osiągnięcia --><!-- Dodano klasy dla tła obrazkowego i poprawy czytelności --><div class="mt-12 lg:mt-0 p-8 rounded-xl stats-background relative shadow-xl dark:shadow-inner dark:shadow-gray-700/20">
+                    <h3 class="relative z-20 text-2xl font-bold text-white mb-6 drop-shadow-md">Kluczowe Osiągnięcia (Liczby Mówią Same Za Siebie)</h3>
+                    
+                    <dl class="relative z-20 grid grid-cols-2 gap-8">
+                        <!-- Statystyka 1: Lata Doświadczenia --><div class="flex flex-col">
+                            <dt class="text-5xl font-extrabold text-white drop-shadow-lg">
+                                15+
+                            </dt>
+                            <dd class="mt-2 text-base font-medium text-white opacity-90 drop-shadow-md">
+                                Lat Doświadczenia
+                            </dd>
+                        </div>
+
+                        <!-- Statystyka 2: Specjaliści --><div class="flex flex-col">
+                            <dt class="text-5xl font-extrabold text-white drop-shadow-lg">
+                                50+
+                            </dt>
+                            <dd class="mt-2 text-base font-medium text-white opacity-90 drop-shadow-md">
+                                Najlepszych Specjalistów
+                            </dd>
+                        </div>
+
+                        <!-- Statystyka 3: Pacjenci --><div class="flex flex-col">
+                            <dt class="text-5xl font-extrabold text-white drop-shadow-lg">
+                                12k+
+                            </dt>
+                            <dd class="mt-2 text-base font-medium text-white opacity-90 drop-shadow-md">
+                                Zadowolonych Pacjentów
+                            </dd>
+                        </div>
+
+                        <!-- Statystyka 4: Zabiegi --><div class="flex flex-col">
+                            <dt class="text-5xl font-extrabold text-white drop-shadow-lg">
+                                100+
+                            </dt>
+                            <dd class="mt-2 text-base font-medium text-white opacity-90 drop-shadow-md">
+                                Rodzajów Zabiegów
+                            </dd>
+                        </div>
+                    </dl>
+                    
+                    <!-- Dodatkowy akcent wewnątrz bloku statystyk --><div class="relative z-20 mt-8 text-center">
+                        <a href="#" class="inline-flex items-center text-base font-medium text-white hover:text-garbary-accent transition drop-shadow-md">
+                            Poznaj nasz zespół &rarr;
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    
+    
+    <!-- PRZYKŁADOWA ZAWARTOŚĆ STRONY (kontener główny) --><main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Zmieniono text-gray-800 na dark:text-white --><h1 class="text-4xl font-bold text-gray-800 mb-6 transition-colors duration-300 dark:text-white">Nasze Usługi Kliniczne</h1>
+        <!-- Zmieniono text-gray-600 na dark:text-gray-300 --><p class="text-lg text-gray-600 transition-colors duration-300 dark:text-gray-300">Tutaj zaczyna się regularna treść strony, poniżej sekcji hero. Powyżej jest już sekcja "O Klinice".</p>
+        <!-- Zmieniono bg-white na dark:bg-gray-800 i dostosowano kolory tekstu --><div class="mt-10 p-6 bg-white rounded-xl shadow-lg border-l-4 border-garbary-primary transition-colors duration-300 dark:bg-gray-800 dark:shadow-2xl dark:shadow-gray-950/50">
             <h2 class="text-2xl font-semibold text-gray-700 transition-colors duration-300 dark:text-gray-100">Wprowadzone Zmiany</h2>
             <ul class="list-disc list-inside mt-4 space-y-2 text-gray-600 transition-colors duration-300 dark:text-gray-400">
-                <li>**Minimalistyczne Usługi w Hero:** Dodano siatkę z 4 kluczowymi usługami (Kardiologia, Ortopedia, Dermatologia, Diagnostyka) bezpośrednio pod tytułem.</li>
-                <li>**Nowy Styl Kart Usług:** Karty mają lekko przezroczyste tło (`bg-white/10`) i efekt rozmycia (`backdrop-blur-md`), aby były subtelne, ale czytelne na tle wideo.</li>
-                <li>**Estetyka:** Poprawiono odstępy, aby uwypuklić minimalistyczny design i scentralizować kluczowe elementy.</li>
+                <li>**Tło dla statystyk:** Dodano `background2.jpg` jako tło dla bloku ze statystykami.</li>
+                <li>**Czytelność tekstu:** Zmieniono kolor tekstu statystyk na biały i dodano `drop-shadow-lg` dla lepszego kontrastu.</li>
+                <li>**Overlay w trybie ciemnym:** Dodano ciemną nakładkę na obraz tła w trybie ciemnym (`.dark .stats-background::before`), aby zachować czytelność.</li>
             </ul>
         </div>
     </main>
 
-    <!-- KOD JAVASCRIPT (bez zmian) -->
-    <script>
+    <!-- KOD JAVASCRIPT (bez zmian) --><script>
         // Logika przełączania trybu jasny/ciemny
         function initializeTheme() {
             const storedTheme = localStorage.getItem('theme');
